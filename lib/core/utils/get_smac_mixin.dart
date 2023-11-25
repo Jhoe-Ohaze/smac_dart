@@ -23,7 +23,7 @@ mixin GetSmacMixin<T extends StatefulWidget, U extends Smac> on State<T> {
   @override
   void initState() {
     smac = createSmac();
-    smac.init();
+    smac.init(context);
     smac.addListener(_updateWidget);
 
     super.initState();
