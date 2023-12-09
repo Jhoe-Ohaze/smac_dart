@@ -5,7 +5,7 @@ import '../domain/smac_unexpected_error.dart';
 import '../utils/smac_behavior_enum.dart';
 import 'smac.dart';
 
-/// A [SMaC] that has default functions for async business.
+/// A SMaC that has default functions for async business.
 ///
 /// There are four main behaviors that this controller can have:
 /// * `waiting`: before any behavior is triggered.
