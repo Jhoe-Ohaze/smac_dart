@@ -4,7 +4,7 @@ import 'package:smac_dart/smac.dart';
 import 'mocks/smac_test_exception.dart';
 
 void main() {
-  final controller = AsyncSmacController();
+  final controller = AsyncSmac();
   final exception = SmacTestException();
 
   test('checks if the initial behavior is "waiting"', () {

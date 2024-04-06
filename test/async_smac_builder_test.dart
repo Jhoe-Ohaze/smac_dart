@@ -6,7 +6,7 @@ import 'mocks/keys.dart';
 import 'mocks/smac_test_exception.dart';
 
 void main() {
-  final asyncSmac = AsyncSmacController();
+  final asyncSmac = AsyncSmac();
   final exception = SmacTestException();
 
   testWidgets('Checks smac builder widget behavior', (tester) async {

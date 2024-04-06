@@ -12,7 +12,7 @@ import 'smac.dart';
 /// * `loading`: while the widget run some tasks or is waiting for data.
 /// * `success`: when all the required tasks reach success.
 /// * `errored`: when the tasks reach some error.
-class AsyncSmacController<T> extends Smac {
+class AsyncSmac extends Smac {
   SmacBehavior _behavior = SmacBehavior.waiting;
   SmacException? _error;
 
