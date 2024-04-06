@@ -5,7 +5,7 @@ import 'mocks/smac_test_exception.dart';
 
 void main() {
   final controller = AsyncSmac();
-  final exception = SmacTestException();
+  const exception = SmacTestException();
 
   test('checks if the initial behavior is "waiting"', () {
     expect(controller.isWaiting, true);

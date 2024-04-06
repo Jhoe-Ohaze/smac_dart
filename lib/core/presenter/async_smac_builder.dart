@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../domain/smac_exception.dart';
+import '../domain/smac_error.dart';
 import '../utils/get_smac_mixin.dart';
 import '../utils/smac_behavior_enum.dart';
 import 'async_smac.dart';
@@ -14,7 +14,7 @@ class AsyncSmacBuilder extends StatefulWidget {
   final WidgetBuilder waitingBuilder;
   final WidgetBuilder loadingBuilder;
   final WidgetBuilder successBuilder;
-  final Widget Function(BuildContext, SmacException) exceptionBuilder;
+  final Widget Function(BuildContext, SmacError) exceptionBuilder;
 
   const AsyncSmacBuilder({
     required this.asyncSmac,
@@ -59,7 +59,7 @@ Widget _defaultLoading(BuildContext context) {
   );
 }
 
-Widget _defaultException(BuildContext context, SmacException error) {
+Widget _defaultException(BuildContext context, SmacError error) {
   return Center(
     child: Column(
       children: [

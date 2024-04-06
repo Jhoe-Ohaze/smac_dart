@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../domain/smac_exception.dart';
+import '../domain/smac_error.dart';
 import '../domain/smac_unexpected_error.dart';
 import '../utils/smac_behavior_enum.dart';
 import 'smac.dart';
@@ -14,14 +14,14 @@ import 'smac.dart';
 /// * `errored`: when the tasks reach some error.
 final class AsyncSmac extends Smac {
   SmacBehavior _behavior = SmacBehavior.waiting;
-  SmacException? _error;
+  SmacError? _error;
 
   bool get isWaiting => _behavior == SmacBehavior.waiting;
   bool get isLoading => _behavior == SmacBehavior.loading;
   bool get isSuccessful => _behavior == SmacBehavior.success;
   bool get isErrored => _behavior == SmacBehavior.errored;
   SmacBehavior get behavior => _behavior;
-  SmacException? get error => _error;
+  SmacError? get error => _error;
 
   /// Sets the behavior value to `loading` and clear any stored error.
   void triggerLoading() {
@@ -37,9 +37,9 @@ final class AsyncSmac extends Smac {
     notifyListeners();
   }
 
-  /// Sets the behavior value to `errored` saves an [SmacException] value in the
+  /// Sets the behavior value to `errored` saves an [SmacError] value in the
   /// controller.
-  void throwError(SmacException error) {
+  void throwError(SmacError error) {
     _error = error;
     _behavior = SmacBehavior.errored;
     notifyListeners();
@@ -49,7 +49,7 @@ final class AsyncSmac extends Smac {
   /// depending on the function status.
   ///
   /// The `rethrowError` value can be changed if you want or not rethrow any
-  /// expected [SmacException].
+  /// expected [SmacError].
   Future<void> waitFor(
     AsyncCallback future, {
     bool rethrowError = true,
@@ -58,11 +58,11 @@ final class AsyncSmac extends Smac {
       triggerLoading();
       await future();
       triggerSuccess();
-    } on SmacException catch (e) {
-      throwError(e);
+    } on SmacError catch (error) {
+      throwError(error);
       if (rethrowError) rethrow;
-    } catch (e) {
-      throwError(SmacUnexpectedError());
+    } catch (error) {
+      throwError(SmacUnexpectedError(error));
       rethrow;
     }
   }
