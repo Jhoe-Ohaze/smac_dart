@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../domain/smac_exception.dart';
+import '../domain/smac_error.dart';
 import '../utils/get_smac_mixin.dart';
 import '../utils/smac_behavior_enum.dart';
 import 'async_smac.dart';
 
-/// A Widget that is synced with [AsyncSmacController] behavior.
+/// A Widget that is synced with [AsyncSmac] behavior.
 ///
 /// When the controller changes its state behavior, this widget will change the
 /// builder that is currently being displayed.
-class AsyncSmacBuilder<T> extends StatefulWidget {
-  final AsyncSmacController<T> controller;
+class AsyncSmacBuilder extends StatefulWidget {
+  final AsyncSmac asyncSmac;
   final WidgetBuilder waitingBuilder;
   final WidgetBuilder loadingBuilder;
   final WidgetBuilder successBuilder;
-  final Widget Function(BuildContext, SmacException) exceptionBuilder;
+  final Widget Function(BuildContext, SmacError) exceptionBuilder;
 
   const AsyncSmacBuilder({
-    required this.controller,
+    required this.asyncSmac,
     this.successBuilder = _defaultSuccess,
     this.waitingBuilder = _defaultWaiting,
     this.loadingBuilder = _defaultLoading,
@@ -30,9 +30,9 @@ class AsyncSmacBuilder<T> extends StatefulWidget {
 }
 
 class _AsyncSmacBuilderState extends State<AsyncSmacBuilder>
-    with GetSmacMixin<AsyncSmacBuilder, AsyncSmacController> {
+    with GetSmacMixin<AsyncSmacBuilder, AsyncSmac> {
   @override
-  AsyncSmacController createSmac() => widget.controller;
+  AsyncSmac createSmac() => widget.asyncSmac;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ Widget _defaultLoading(BuildContext context) {
   );
 }
 
-Widget _defaultException(BuildContext context, SmacException error) {
+Widget _defaultException(BuildContext context, SmacError error) {
   return Center(
     child: Column(
       children: [

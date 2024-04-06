@@ -1,6 +1,5 @@
-import 'package:smac_dart/core/domain/smac_exception.dart';
+import 'package:smac_dart/core/domain/smac_error.dart';
 
-class SmacTestException implements SmacException {
-  @override
-  String get message => 'Test error thrown';
+class SmacTestException extends SmacError {
+  const SmacTestException() : super(message: 'Test error thrown');
 }

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 
-class Smac extends ChangeNotifier {
-  Smac() {
-    onInitClass();
-  }
-
-  /// Called when this class is instantiated.
-  void onInitClass() {}
-
-  /// Called when this SMaC that is binded to a widget is inserted on the tree.
-  ///
-  /// It runs on the binded widget `initState()`, and get its build context in the tree.
-  void onInitState(BuildContext context) {}
-}
+/// A class that can be used as base for classes that store anything
+/// related to state management.
+/// 
+/// The childrens of this class will work in conjunction with [GetSmacMixin]
+/// to separate all the logic from the [State] class.
+/// 
+/// It is highly recomended to atach only one SMaC per state. 
+abstract class Smac extends ChangeNotifier {}

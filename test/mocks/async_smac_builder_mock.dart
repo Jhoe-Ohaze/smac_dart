@@ -4,7 +4,7 @@ import 'package:smac_dart/core/presenter/async_smac.dart';
 import 'keys.dart';
 
 class AsyncSmacBuilderMock extends StatelessWidget {
-  final AsyncSmacController smacController;
+  final AsyncSmac smacController;
 
   const AsyncSmacBuilderMock({
     required this.smacController,
@@ -17,7 +17,7 @@ class AsyncSmacBuilderMock extends StatelessWidget {
       title: 'Smac Builder Widget Mock',
       home: Scaffold(
         body: AsyncSmacBuilder(
-          controller: smacController,
+          asyncSmac: smacController,
           waitingBuilder: (context) => const SizedBox(key: smacTestWaitingKey),
           loadingBuilder: (context) => const SizedBox(key: smacTestLoadingKey),
           exceptionBuilder: (context, exception) {
