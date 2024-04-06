@@ -1,3 +1,4 @@
-## 0.0.1
+## Version 0.1.0
 
-* TODO: Describe initial release.
+* Initial Release
+* Added SMaC components
