@@ -1,6 +1,6 @@
 name: smac_dart
-description: Simple state management component
-version: 0.1.0
+description: A simple state management component
+version: 1.0.0
 homepage:
 
 environment:

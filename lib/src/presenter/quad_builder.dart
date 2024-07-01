@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../../smac.dart';
 import '../domain/smac_error.dart';
-import '../utils/get_smac_mixin.dart';
-import '../utils/smac_behavior_enum.dart';
-import 'async_smac.dart';
 
-/// A Widget that is synced with [AsyncSmac] behavior.
+/// A Widget that is synced with [QuadSmac] behavior.
 ///
 /// When the controller changes its state behavior, this widget will change the
 /// builder that is currently being displayed.
-class AsyncSmacBuilder extends StatefulWidget {
-  final AsyncSmac asyncSmac;
+class QuadBuilder extends StatefulWidget {
+  final QuadSmac asyncSmac;
   final WidgetBuilder waitingBuilder;
   final WidgetBuilder loadingBuilder;
   final WidgetBuilder successBuilder;
   final Widget Function(BuildContext, SmacError) exceptionBuilder;
 
-  const AsyncSmacBuilder({
+  const QuadBuilder({
     required this.asyncSmac,
     this.successBuilder = _defaultSuccess,
     this.waitingBuilder = _defaultWaiting,
@@ -26,31 +24,32 @@ class AsyncSmacBuilder extends StatefulWidget {
   });
 
   @override
-  State<AsyncSmacBuilder> createState() => _AsyncSmacBuilderState();
+  State<QuadBuilder> createState() => _QuadBuilderState();
 }
 
-class _AsyncSmacBuilderState extends State<AsyncSmacBuilder>
-    with GetSmacMixin<AsyncSmacBuilder, AsyncSmac> {
+class _QuadBuilderState extends State<QuadBuilder>
+    with GetSmacMixin<QuadBuilder, QuadSmac> {
   @override
-  AsyncSmac createSmac() => widget.asyncSmac;
+  QuadSmac createSmac() => widget.asyncSmac;
 
   @override
   Widget build(BuildContext context) {
-    switch (smac.behavior) {
-      case SmacBehavior.waiting:
-        return widget.waitingBuilder(context);
-      case SmacBehavior.loading:
-        return widget.loadingBuilder(context);
-      case SmacBehavior.success:
-        return widget.successBuilder(context);
-      case SmacBehavior.errored:
-        return widget.exceptionBuilder(context, smac.error!);
+    if (smac.isWaiting) {
+      return widget.waitingBuilder(context);
+    } else if (smac.isLoading) {
+      return widget.loadingBuilder(context);
+    } else if (smac.isSuccessful) {
+      return widget.successBuilder(context);
+    } else {
+      return widget.exceptionBuilder(context, smac.error!);
     }
   }
 }
 
 Widget _defaultWaiting(BuildContext context) {
-  return const SizedBox();
+  return const Center(
+    child: Text('Unitialized'),
+  );
 }
 
 Widget _defaultLoading(BuildContext context) {
@@ -72,7 +71,7 @@ Widget _defaultException(BuildContext context, SmacError error) {
         Text(
           error.message,
           style: const TextStyle(color: Colors.red),
-        )
+        ),
       ],
     ),
   );

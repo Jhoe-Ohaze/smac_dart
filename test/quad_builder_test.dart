@@ -1,17 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smac_dart/smac.dart';
 
-import 'mocks/async_smac_builder_mock.dart';
+import 'mocks/quad_builder_mock.dart';
 import 'mocks/keys.dart';
 import 'mocks/smac_test_exception.dart';
 
 void main() {
-  final asyncSmac = AsyncSmac();
-  final exception = SmacTestException();
+  final asyncSmac = QuadSmac();
+  const exception = SmacTestError();
 
   testWidgets('Checks smac builder widget behavior', (tester) async {
     await tester.pumpWidget(
-      AsyncSmacBuilderMock(
+      QuadBuilderMock(
         smacController: asyncSmac,
       ),
     );

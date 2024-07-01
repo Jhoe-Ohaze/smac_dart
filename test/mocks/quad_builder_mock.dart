@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smac_dart/core/presenter/async_smac_builder.dart';
-import 'package:smac_dart/core/presenter/async_smac.dart';
+import 'package:smac_dart/src/presenter/quad_builder.dart';
+import 'package:smac_dart/src/presenter/quad_smac.dart';
 import 'keys.dart';
 
-class AsyncSmacBuilderMock extends StatelessWidget {
-  final AsyncSmac smacController;
+class QuadBuilderMock extends StatelessWidget {
+  final QuadSmac smacController;
 
-  const AsyncSmacBuilderMock({
+  const QuadBuilderMock({
     required this.smacController,
     super.key,
   });
@@ -16,7 +16,7 @@ class AsyncSmacBuilderMock extends StatelessWidget {
     return MaterialApp(
       title: 'Smac Builder Widget Mock',
       home: Scaffold(
-        body: AsyncSmacBuilder(
+        body: QuadBuilder(
           asyncSmac: smacController,
           waitingBuilder: (context) => const SizedBox(key: smacTestWaitingKey),
           loadingBuilder: (context) => const SizedBox(key: smacTestLoadingKey),
