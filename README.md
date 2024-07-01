@@ -100,15 +100,15 @@ class _CounterPageState extends State<CounterPage>
 }
 ```
 
-## Async SMaC
+## Quad SMaC
 
-If you want a simple way to manage the state that have asynchronous logic, you can also use the AsyncSmac in conjunction with AsyncSmacBuilder.
+If you want a simple way to manage the state that have asynchronous logic, you can also use the QuadSmac in conjunction with QuadBuilder.
 
-Both the AsyncSmac and the AsyncSmacBuilder have reactivity for 4 default states:
-* Waiting -> When the asynchrony is not started.
-* Loading -> When the asynchrony is running.
-* Success -> When the asynchrony suceeded.
-* Errored -> Whent the asynchrony failed, and contains an error.
+Both the QuadSmac and the QuadBuilder have reactivity for 4 default states:
+* Waiting -> When the builder is uninitialized, and is waiting the SMaC to change the state.
+* Loading -> When an asynchrony is running.
+* Successful -> When an asynchrony suceeded.
+* Errored -> Whent an asynchrony failed, and contains an error.
 
 You can manually change the AsyncSmac state, or use the `waitFor()` function to have a default behavior to asynchrony.
 
