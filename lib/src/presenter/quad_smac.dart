@@ -1,47 +1,48 @@
 import 'package:flutter/foundation.dart';
 
 import '../domain/smac_error.dart';
-import '../domain/smac_unexpected_error.dart';
-import '../utils/smac_behavior_enum.dart';
+import '../domain/smac_behavior_enum.dart';
 import 'smac.dart';
 
-/// A SMaC that has default functions for async business.
+/// A SMaC that has four default behaviors for async business.
 ///
 /// There are four main behaviors that this controller can have:
-/// * `waiting`: before any behavior is triggered.
+/// * `waiting`: Unitialized, waiting any behavior to be triggered.
 /// * `loading`: while the widget run some tasks or is waiting for data.
 /// * `success`: when all the required tasks reach success.
 /// * `errored`: when the tasks reach some error.
-final class AsyncSmac extends Smac {
-  SmacBehavior _behavior = SmacBehavior.waiting;
+final class QuadSmac extends Smac {
+  SmacBehaviorEnum _behavior = SmacBehaviorEnum.waiting;
   SmacError? _error;
 
-  bool get isWaiting => _behavior == SmacBehavior.waiting;
-  bool get isLoading => _behavior == SmacBehavior.loading;
-  bool get isSuccessful => _behavior == SmacBehavior.success;
-  bool get isErrored => _behavior == SmacBehavior.errored;
-  SmacBehavior get behavior => _behavior;
+  bool get isWaiting => _behavior == SmacBehaviorEnum.waiting;
+  bool get isLoading => _behavior == SmacBehaviorEnum.loading;
+  bool get isSuccessful => _behavior == SmacBehaviorEnum.success;
+  bool get isErrored => _behavior == SmacBehaviorEnum.errored;
   SmacError? get error => _error;
 
   /// Sets the behavior value to `loading` and clear any stored error.
+  @mustCallSuper
   void triggerLoading() {
     _error = null;
-    _behavior = SmacBehavior.loading;
+    _behavior = SmacBehaviorEnum.loading;
     notifyListeners();
   }
 
   /// Sets the behavior value to `success` and clear any stored error.
+  @mustCallSuper
   void triggerSuccess() {
     _error = null;
-    _behavior = SmacBehavior.success;
+    _behavior = SmacBehaviorEnum.success;
     notifyListeners();
   }
 
   /// Sets the behavior value to `errored` saves an [SmacError] value in the
   /// controller.
+  @mustCallSuper
   void throwError(SmacError error) {
     _error = error;
-    _behavior = SmacBehavior.errored;
+    _behavior = SmacBehaviorEnum.errored;
     notifyListeners();
   }
 

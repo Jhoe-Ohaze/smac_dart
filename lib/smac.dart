@@ -1,6 +1,5 @@
 library smac_dart;
 
-export 'core/presenter/smac.dart';
-export 'core/presenter/async_smac_builder.dart';
-export 'core/presenter/async_smac.dart';
-export 'core/utils/get_smac_mixin.dart';
+export 'src/presenter/smac.dart';
+export 'src/presenter/quad_builder.dart';
+export 'src/presenter/quad_smac.dart';

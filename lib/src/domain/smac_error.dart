@@ -18,3 +18,12 @@ class SmacError implements Exception {
   @override
   String toString() => '$runtimeType: $message';
 }
+
+class SmacUnexpectedError extends SmacError {
+  const SmacUnexpectedError(
+    Object? sourceError,
+  ) : super(
+          message: 'An unexpected error has occurred!',
+          sourceError: sourceError,
+        );
+}

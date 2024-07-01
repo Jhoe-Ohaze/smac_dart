@@ -1,4 +1,4 @@
-enum SmacBehavior {
+enum SmacBehaviorEnum {
   waiting,
   loading,
   success,
